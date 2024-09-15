@@ -38,6 +38,7 @@
             </fieldset>
             <fieldset class="form-group">
               <input type="text" name="tags" id="tag-form" class="form-control" placeholder="Enter tags"/>
+              <input type="hidden" name="tags" id="hidden-tags" value="">
               <div name="tags" class="tag-list">
                 <!-- DOM操作でタグを追加 -->
               </div>
@@ -61,7 +62,6 @@ const tagList = [];
 
 //登録
 document.addEventListener('DOMContentLoaded', function() {
-    // const TagList = document.querySelector('.tag-list');
     const tagInput = document.querySelector('#tag-form');
 
     tagInput.addEventListener('keydown', (e) =>
@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', function() {
       //iタグ
       const TagName = document.createElement('i');
       TagName.classList.add('ion-close-round');
-      // TagName.setAttribute('name', 'list' + (TagList.childElementCount + 1));
       const tagValue = tagInput.value;
       TagName.innerText = tagValue;
       tagList.push(tagValue);
@@ -102,7 +101,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.querySelector('button').addEventListener('click', function() {
-  const tagInput = document.querySelector('#tag-form');
+  const tagInput = document.querySelector('#hidden-tags');
   tagInput.value = JSON.stringify(tagList);
   document.querySelector('#article-form').submit();
 });
