@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Comment;
+use App\Http\Requests\StoreCommentRequest;
 
 class CommentController extends Controller
 {
@@ -26,10 +27,9 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreCommentRequest $request)
     {
         // dd($request);
-
         Comment::create([
             'article_id' => $request->id,
             'comment' => $request->comment,
@@ -67,6 +67,9 @@ class CommentController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        return to_route('articles.show', ['id' => $comment->article_id]);
     }
 }

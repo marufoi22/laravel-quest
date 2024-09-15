@@ -64,7 +64,7 @@ class ArticleController extends Controller
 
         $comments = DB::table('comments')
             ->where('article_id', $id)
-            ->select('comments.comment')
+            ->select('comments.id', 'comments.comment')
             ->get();
 
         //タグ取得
